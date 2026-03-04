@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { COLORS, FONTS, SHADOWS } from '../utils/theme';
 
-const QUESTION_COUNTS = [20, 30, 50, 75, 100];
+const QUESTION_COUNTS = [20, 30, 50, 75];
 
 export default function TestSetupScreen({ navigation }) {
   const [selectedCount, setSelectedCount] = useState(50);

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { STUDY_MATERIAL } from '../data/studyMaterial';
+import FormattedText from '../components/FormattedText';
 import { COLORS, FONTS, SHADOWS } from '../utils/theme';
 
 export default function StudyMaterialScreen({ route }) {
@@ -49,7 +50,7 @@ export default function StudyMaterialScreen({ route }) {
           </TouchableOpacity>
           {expandedSection === index && (
             <View style={styles.sectionContent}>
-              <Text style={styles.contentText}>{section.content}</Text>
+              <FormattedText style={styles.contentText}>{section.content}</FormattedText>
             </View>
           )}
         </View>

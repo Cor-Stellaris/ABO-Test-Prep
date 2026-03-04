@@ -1056,9 +1056,8 @@ export function generateMockTest(numQuestions = 50) {
   return selected.map(prepareQuestion);
 }
 
-export function generateCategoryTest(categoryId, numQuestions = 10) {
-  const questions = getQuestionsByCategory(categoryId);
-  return questions.slice(0, Math.min(numQuestions, questions.length));
+export function generateCategoryTest(categoryId) {
+  return getQuestionsByCategory(categoryId);
 }
 
 export function getAvailableCategories() {
