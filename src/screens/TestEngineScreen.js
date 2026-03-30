@@ -12,14 +12,32 @@ import { saveTestResult } from '../utils/storage';
 import { COLORS, FONTS, SHADOWS } from '../utils/theme';
 
 export default function TestEngineScreen({ route, navigation }) {
-  const { mode, numQuestions = 50, categoryId, categoryName } = route.params;
+  const { mode, numQuestions = 50, categoryId, categoryName, timeLimitMinutes } = route.params;
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [answers, setAnswers] = useState([]);
   const [testComplete, setTestComplete] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState(null); // seconds
   const scrollRef = useRef(null);
+  const timerRef = useRef(null);
+  const answersRef = useRef([]);
+  const questionsRef = useRef([]);
+  const testCompleteRef = useRef(false);
+
+  // Keep refs in sync with state so timer callback sees latest values
+  useEffect(() => {
+    answersRef.current = answers;
+  }, [answers]);
+
+  useEffect(() => {
+    questionsRef.current = questions;
+  }, [questions]);
+
+  useEffect(() => {
+    testCompleteRef.current = testComplete;
+  }, [testComplete]);
 
   useEffect(() => {
     let q;
@@ -30,7 +48,56 @@ export default function TestEngineScreen({ route, navigation }) {
     }
     setQuestions(q);
     setAnswers(new Array(q.length).fill(null));
+
+    // Initialize timer if timed test
+    if (timeLimitMinutes) {
+      setTimeRemaining(timeLimitMinutes * 60);
+    }
   }, []);
+
+  // Countdown timer effect
+  useEffect(() => {
+    if (timeRemaining === null || timeRemaining <= 0) return;
+
+    timerRef.current = setInterval(() => {
+      setTimeRemaining((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timerRef.current);
+  }, [timeRemaining !== null && timeRemaining > 0]);
+
+  // Auto-submit when timer reaches 0
+  useEffect(() => {
+    if (timeRemaining === 0 && !testCompleteRef.current && questionsRef.current.length > 0) {
+      finishTestOnTimeout();
+    }
+  }, [timeRemaining]);
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
+
+  const formatTime = (seconds) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s.toString().padStart(2, '0')}`;
+  };
+
+  const getTimerColor = () => {
+    if (timeRemaining === null) return COLORS.text;
+    if (timeRemaining <= 60) return COLORS.danger;
+    if (timeRemaining <= 300) return COLORS.warning;
+    return COLORS.text;
+  };
 
   const currentQuestion = questions[currentIndex];
 
@@ -75,7 +142,63 @@ export default function TestEngineScreen({ route, navigation }) {
     }
   };
 
+  const finishTestOnTimeout = async () => {
+    if (testCompleteRef.current) return;
+    // Use refs to get the latest values
+    const finalAnswers = [...answersRef.current];
+    const qs = questionsRef.current;
+    // Mark all unanswered as skipped
+    for (let i = 0; i < finalAnswers.length; i++) {
+      if (finalAnswers[i] === null) finalAnswers[i] = -1;
+    }
+
+    let correct = 0;
+    let incorrect = 0;
+    let skipped = 0;
+    const categoryResults = {};
+
+    qs.forEach((q, i) => {
+      const cat = q.category;
+      if (!categoryResults[cat]) {
+        categoryResults[cat] = { correct: 0, total: 0, incorrect: 0 };
+      }
+      categoryResults[cat].total++;
+
+      if (finalAnswers[i] === -1) {
+        skipped++;
+      } else if (finalAnswers[i] === q.correctIndex) {
+        correct++;
+        categoryResults[cat].correct++;
+      } else {
+        incorrect++;
+        categoryResults[cat].incorrect++;
+      }
+    });
+
+    const result = {
+      mode,
+      categoryId: categoryId || 'all',
+      categoryName: categoryName || 'Full Mock Test',
+      totalQuestions: qs.length,
+      correct,
+      incorrect,
+      skipped,
+      score: Math.round((correct / qs.length) * 100),
+      categoryResults,
+      answers: finalAnswers,
+      timeLimitMinutes: timeLimitMinutes || null,
+      timeExpired: true,
+    };
+
+    await saveTestResult(result);
+    setTestComplete(true);
+
+    navigation.replace('TestResults', { result });
+  };
+
   const finishTest = async () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+
     const finalAnswers = [...answers];
     // Mark current as skipped if not answered
     if (finalAnswers[currentIndex] === null) {
@@ -105,6 +228,10 @@ export default function TestEngineScreen({ route, navigation }) {
       }
     });
 
+    const timeUsed = timeLimitMinutes
+      ? timeLimitMinutes * 60 - (timeRemaining || 0)
+      : null;
+
     const result = {
       mode,
       categoryId: categoryId || 'all',
@@ -116,6 +243,9 @@ export default function TestEngineScreen({ route, navigation }) {
       score: Math.round((correct / questions.length) * 100),
       categoryResults,
       answers: finalAnswers,
+      timeLimitMinutes: timeLimitMinutes || null,
+      timeUsedSeconds: timeUsed,
+      timeExpired: false,
     };
 
     await saveTestResult(result);
@@ -130,7 +260,14 @@ export default function TestEngineScreen({ route, navigation }) {
       'Are you sure you want to quit? Your progress will not be saved.',
       [
         { text: 'Cancel', style: 'cancel' },
-        { text: 'Quit', style: 'destructive', onPress: () => navigation.goBack() },
+        {
+          text: 'Quit',
+          style: 'destructive',
+          onPress: () => {
+            if (timerRef.current) clearInterval(timerRef.current);
+            navigation.goBack();
+          },
+        },
       ]
     );
   };
@@ -147,14 +284,23 @@ export default function TestEngineScreen({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* Progress Bar */}
+      {/* Progress Bar & Timer */}
       <View style={styles.progressContainer}>
         <View style={styles.progressBar}>
           <View style={[styles.progressFill, { width: `${progress}%` }]} />
         </View>
-        <Text style={styles.progressText}>
-          {currentIndex + 1} of {questions.length}
-        </Text>
+        <View style={styles.progressInfoRow}>
+          <Text style={styles.progressText}>
+            {currentIndex + 1} of {questions.length}
+          </Text>
+          {timeRemaining !== null && (
+            <Text style={[styles.timerText, { color: getTimerColor() }]}>
+              {timeRemaining <= 60 ? '!! ' : ''}
+              {formatTime(timeRemaining)}
+              {timeRemaining <= 60 ? ' !!' : ''}
+            </Text>
+          )}
+        </View>
       </View>
 
       <ScrollView
@@ -330,9 +476,18 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary,
     borderRadius: 3,
   },
+  progressInfoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   progressText: {
     ...FONTS.small,
-    textAlign: 'center',
+  },
+  timerText: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    fontVariant: ['tabular-nums'],
   },
   scrollView: {
     flex: 1,

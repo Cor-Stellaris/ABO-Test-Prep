@@ -5,13 +5,23 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Switch,
 } from 'react-native';
 import { COLORS, FONTS, SHADOWS } from '../utils/theme';
 
 const QUESTION_COUNTS = [20, 30, 50, 75];
+const TIME_LIMITS = [
+  { label: '15 min', minutes: 15 },
+  { label: '30 min', minutes: 30 },
+  { label: '45 min', minutes: 45 },
+  { label: '60 min', minutes: 60 },
+  { label: '90 min', minutes: 90 },
+];
 
 export default function TestSetupScreen({ navigation }) {
   const [selectedCount, setSelectedCount] = useState(50);
+  const [timedEnabled, setTimedEnabled] = useState(false);
+  const [selectedMinutes, setSelectedMinutes] = useState(60);
 
   return (
     <ScrollView
@@ -50,6 +60,46 @@ export default function TestSetupScreen({ navigation }) {
         </View>
       </View>
 
+      <View style={styles.section}>
+        <View style={styles.timedHeaderRow}>
+          <Text style={styles.sectionTitle}>Timed Test</Text>
+          <Switch
+            value={timedEnabled}
+            onValueChange={setTimedEnabled}
+            trackColor={{ false: '#D5D8DC', true: '#AED6F1' }}
+            thumbColor={timedEnabled ? COLORS.primary : '#F4F6F7'}
+          />
+        </View>
+        <Text style={styles.timedDescription}>
+          {timedEnabled
+            ? 'A countdown timer will be displayed. The test auto-submits when time runs out.'
+            : 'No time limit. Answer at your own pace.'}
+        </Text>
+        {timedEnabled && (
+          <View style={styles.optionRow}>
+            {TIME_LIMITS.map((tl) => (
+              <TouchableOpacity
+                key={tl.minutes}
+                style={[
+                  styles.optionButton,
+                  selectedMinutes === tl.minutes && styles.optionButtonActive,
+                ]}
+                onPress={() => setSelectedMinutes(tl.minutes)}
+              >
+                <Text
+                  style={[
+                    styles.optionText,
+                    selectedMinutes === tl.minutes && styles.optionTextActive,
+                  ]}
+                >
+                  {tl.label}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
+      </View>
+
       <View style={styles.infoCard}>
         <Text style={styles.infoTitle}>What to Expect</Text>
         <View style={styles.infoRow}>
@@ -82,6 +132,14 @@ export default function TestSetupScreen({ navigation }) {
             Results are saved to your test history
           </Text>
         </View>
+        {timedEnabled && (
+          <View style={styles.infoRow}>
+            <Text style={styles.bullet}>•</Text>
+            <Text style={styles.infoText}>
+              Timer counts down -- unanswered questions are marked skipped when time expires
+            </Text>
+          </View>
+        )}
       </View>
 
       <TouchableOpacity
@@ -90,11 +148,16 @@ export default function TestSetupScreen({ navigation }) {
           navigation.navigate('TestEngine', {
             mode: 'full',
             numQuestions: selectedCount,
+            timeLimitMinutes: timedEnabled ? selectedMinutes : null,
           })
         }
         activeOpacity={0.7}
       >
-        <Text style={styles.startButtonText}>Start Mock Test</Text>
+        <Text style={styles.startButtonText}>
+          {timedEnabled
+            ? `Start Timed Test (${selectedMinutes} min)`
+            : 'Start Mock Test'}
+        </Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -125,6 +188,19 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     ...FONTS.subheading,
+    marginBottom: 12,
+  },
+  timedHeaderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  timedDescription: {
+    ...FONTS.regular,
+    color: COLORS.textLight,
+    fontSize: 13,
+    lineHeight: 18,
     marginBottom: 12,
   },
   optionRow: {
