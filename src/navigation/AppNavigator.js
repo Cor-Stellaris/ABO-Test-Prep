@@ -8,6 +8,7 @@ import StudyCategoriesScreen from '../screens/StudyCategoriesScreen';
 import StudyMaterialScreen from '../screens/StudyMaterialScreen';
 import TestSetupScreen from '../screens/TestSetupScreen';
 import CategoryTestScreen from '../screens/CategoryTestScreen';
+import ExamSimSetupScreen from '../screens/ExamSimSetupScreen';
 import TestEngineScreen from '../screens/TestEngineScreen';
 import TestResultsScreen from '../screens/TestResultsScreen';
 import TestHistoryScreen from '../screens/TestHistoryScreen';
@@ -61,6 +62,11 @@ export default function AppNavigator() {
           name="CategoryTest"
           component={CategoryTestScreen}
           options={{ title: 'Practice by Category' }}
+        />
+        <Stack.Screen
+          name="ExamSim"
+          component={ExamSimSetupScreen}
+          options={{ title: 'Exam Simulation' }}
         />
         <Stack.Screen
           name="TestEngine"

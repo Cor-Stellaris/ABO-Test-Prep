@@ -22,6 +22,7 @@ export default function TestEngineScreen({ route, navigation }) {
     answers: reviewAnswers = null,
   } = route.params;
   const isReview = mode === 'review';
+  const isExamSim = mode === 'exam_sim';
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -143,7 +144,19 @@ export default function TestEngineScreen({ route, navigation }) {
     const newAnswers = [...answers];
     newAnswers[currentIndex] = selectedAnswer;
     setAnswers(newAnswers);
-    setShowExplanation(true);
+
+    if (isExamSim) {
+      // In exam sim: no explanation, go straight to next
+      if (currentIndex < questions.length - 1) {
+        setCurrentIndex(currentIndex + 1);
+        setSelectedAnswer(null);
+        scrollRef.current?.scrollTo({ y: 0, animated: true });
+      } else {
+        finishTest();
+      }
+    } else {
+      setShowExplanation(true);
+    }
   };
 
   const handleNext = () => {

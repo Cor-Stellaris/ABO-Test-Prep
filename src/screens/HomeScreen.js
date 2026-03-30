@@ -33,6 +33,13 @@ export default function HomeScreen({ navigation }) {
       color: COLORS.accent,
     },
     {
+      title: 'Exam Simulation',
+      subtitle: '125 questions, 2-hour timer — real exam format',
+      icon: '🏆',
+      screen: 'ExamSim',
+      color: COLORS.accent,
+    },
+    {
       title: 'Test History',
       subtitle: 'Review past results & progress',
       icon: '📊',
