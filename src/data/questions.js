@@ -1759,6 +1759,166 @@ const staticQuestions = [
     correctIndex: 2,
     explanation: 'ANSI requires lenses to be free of visible defects in the central 30mm zone.',
   },
+  {
+    id: 'ansi-11',
+    category: 'ansi',
+    question: 'According to ANSI Z80.1, the tolerance for sphere power between 0 and ±6.50 D is:',
+    choices: ['±0.09 D', '±0.13 D', '±0.15 D', '±0.25 D'],
+    correctIndex: 1,
+    explanation: 'ANSI Z80.1 specifies ±0.13 D tolerance for sphere powers between 0 and ±6.50 D.',
+  },
+  {
+    id: 'ansi-12',
+    category: 'ansi',
+    question: 'For ANSI Z80.1, the cylinder power tolerance for cylinders up to ±2.00 D is:',
+    choices: ['±0.09 D', '±0.13 D', '±0.15 D', '±0.20 D'],
+    correctIndex: 1,
+    explanation: 'Cylinder powers up to ±2.00 D have a tolerance of ±0.13 D per ANSI Z80.1.',
+  },
+  {
+    id: 'ansi-13',
+    category: 'ansi',
+    question: 'ANSI Z80.1 requires that the axis tolerance for a cylinder of -0.50 D is:',
+    choices: ['±7°', '±5°', '±3°', '±14°'],
+    correctIndex: 3,
+    explanation: 'For cylinder powers from 0.25 to 0.50 D, the axis tolerance is ±14°.',
+  },
+  {
+    id: 'ansi-14',
+    category: 'ansi',
+    question: 'What is the ANSI axis tolerance for a cylinder power of -1.00 D?',
+    choices: ['±2°', '±3°', '±5°', '±7°'],
+    correctIndex: 3,
+    explanation: 'For cylinder powers from 0.75 to 1.50 D, the axis tolerance is ±7°.',
+  },
+  {
+    id: 'ansi-15',
+    category: 'ansi',
+    question: 'The ANSI axis tolerance for a cylinder power of -3.00 D is:',
+    choices: ['±2°', '±3°', '±5°', '±7°'],
+    correctIndex: 1,
+    explanation: 'For cylinder powers over 2.50 D, the axis tolerance is ±3°.',
+  },
+  {
+    id: 'ansi-16',
+    category: 'ansi',
+    question: 'According to ANSI Z80.1, the horizontal prism imbalance tolerance between the two lenses is:',
+    choices: ['0.25Δ', '0.33Δ', '0.50Δ', '0.67Δ'],
+    correctIndex: 3,
+    explanation: 'ANSI Z80.1 allows up to 0.67Δ (2/3Δ) horizontal prism imbalance between the two lenses.',
+  },
+  {
+    id: 'ansi-17',
+    category: 'ansi',
+    question: 'The vertical prism imbalance tolerance per ANSI Z80.1 is:',
+    choices: ['0.25Δ', '0.33Δ', '0.50Δ', '0.67Δ'],
+    correctIndex: 1,
+    explanation: 'ANSI Z80.1 allows up to 0.33Δ (1/3Δ) vertical prism imbalance between the two lenses.',
+  },
+  {
+    id: 'ansi-18',
+    category: 'ansi',
+    question: 'ANSI Z87.1 covers standards for:',
+    choices: ['Ophthalmic prescription lenses', 'Safety eyewear', 'Sunglasses', 'Contact lenses'],
+    correctIndex: 1,
+    explanation: 'ANSI Z87.1 is the standard for occupational and educational personal eye and face protection devices (safety eyewear).',
+  },
+  {
+    id: 'ansi-19',
+    category: 'ansi',
+    question: 'High-velocity impact resistance testing per ANSI Z87.1 uses a steel ball of what diameter?',
+    choices: ['1/4 inch', '3/8 inch', '1/2 inch', '1 inch'],
+    correctIndex: 0,
+    explanation: 'ANSI Z87.1 high-velocity impact testing uses a 1/4 inch steel ball fired at the lens.',
+  },
+  {
+    id: 'ansi-20',
+    category: 'ansi',
+    question: 'The FDA requires all dress (non-safety) lenses to pass:',
+    choices: ['ANSI Z87.1 high-velocity test', 'The 1-inch steel ball drop test', 'The 5/8 inch steel ball drop test at 50 inches', 'No impact test is required'],
+    correctIndex: 2,
+    explanation: 'Per FDA 21 CFR 801.410, all dress lenses must withstand impact from a 5/8 inch steel ball dropped from 50 inches.',
+  },
+  {
+    id: 'ansi-21',
+    category: 'ansi',
+    question: 'ANSI Z80.1 tolerance for sphere power above ±6.50 D is:',
+    choices: ['±0.13 D', '±0.20 D', '±0.25 D', '±2% of sphere power'],
+    correctIndex: 2,
+    explanation: 'For sphere powers above ±6.50 D, the tolerance increases to ±0.25 D.',
+  },
+  {
+    id: 'ansi-22',
+    category: 'ansi',
+    question: 'Per ANSI Z80.1, the cylinder power tolerance for cylinders above ±2.00 D and up to ±4.50 D is:',
+    choices: ['±0.13 D', '±0.15 D', '±0.20 D', '±0.25 D'],
+    correctIndex: 1,
+    explanation: 'Cylinder powers above ±2.00 D and up to ±4.50 D have a tolerance of ±0.15 D.',
+  },
+  {
+    id: 'ansi-23',
+    category: 'ansi',
+    question: 'Safety frames per ANSI Z87.1 must be marked with:',
+    choices: ['The letter "S"', 'The letter "Z87"', 'The manufacturer logo only', 'No marking is required'],
+    correctIndex: 1,
+    explanation: 'ANSI Z87.1 requires safety frames to be marked with "Z87" on the frame front and temples.',
+  },
+  {
+    id: 'ansi-24',
+    category: 'ansi',
+    question: 'ANSI Z80.3 covers standards for:',
+    choices: ['Dress eyeglasses', 'Non-prescription sunglasses', 'Safety eyewear', 'Contact lenses'],
+    correctIndex: 1,
+    explanation: 'ANSI Z80.3 covers requirements for non-prescription sunglasses and fashion eyewear.',
+  },
+  {
+    id: 'ansi-25',
+    category: 'ansi',
+    question: 'The prism reference point (PRP) tolerance for horizontal placement per ANSI Z80.1 is:',
+    choices: ['±0.5mm', '±1.0mm', '±2.5mm', '±5.0mm'],
+    correctIndex: 1,
+    explanation: 'The PRP must be within ±1.0mm of the specified horizontal position per ANSI Z80.1.',
+  },
+  {
+    id: 'ansi-26',
+    category: 'ansi',
+    question: 'According to ANSI Z87.1, which marking indicates a lens meets high-impact requirements?',
+    choices: ['Z87', 'Z87+', 'Z80.1', 'ANSI-HI'],
+    correctIndex: 1,
+    explanation: 'The "+" marking (Z87+) indicates the lens meets high-impact requirements per ANSI Z87.1.',
+  },
+  {
+    id: 'ansi-27',
+    category: 'ansi',
+    question: 'The ANSI Z80.1 tolerance for add power above +4.00 D is:',
+    choices: ['±0.12 D', '±0.15 D', '±0.18 D', '±0.25 D'],
+    correctIndex: 2,
+    explanation: 'Add power tolerance above +4.00 D is ±0.18 D per ANSI Z80.1.',
+  },
+  {
+    id: 'ansi-28',
+    category: 'ansi',
+    question: 'ANSI Z80.1 specifies that seg placement (vertical) tolerance for multifocals is:',
+    choices: ['±0.5mm', '±1.0mm', '±2.0mm', '±3.0mm'],
+    correctIndex: 1,
+    explanation: 'Segment height (vertical placement) tolerance is ±1.0mm per ANSI Z80.1.',
+  },
+  {
+    id: 'ansi-29',
+    category: 'ansi',
+    question: 'The minimum center thickness for safety lenses (non-prescription) per ANSI Z87.1 is:',
+    choices: ['1.0mm', '2.0mm', '3.0mm', '4.0mm'],
+    correctIndex: 2,
+    explanation: 'ANSI Z87.1 requires a minimum center thickness of 3.0mm for non-prescription safety lenses.',
+  },
+  {
+    id: 'ansi-30',
+    category: 'ansi',
+    question: 'ANSI Z80.1 axis tolerance for a cylinder power of -2.25 D is:',
+    choices: ['±2°', '±3°', '±5°', '±7°'],
+    correctIndex: 2,
+    explanation: 'For cylinder powers from 1.75 to 2.50 D, the axis tolerance is ±5°.',
+  },
 
   // ═══════════════════════════════════════════════════
   //  CATEGORY: definitions
@@ -1842,6 +2002,166 @@ const staticQuestions = [
     choices: ['The power of the front surface', 'The power measured from the back surface, as read by a lensometer', 'The combined power times thickness', 'The power of the eye itself'],
     correctIndex: 1,
     explanation: 'Back vertex power is measured from the back surface and is what the lensometer reads and the Rx specifies.',
+  },
+  {
+    id: 'def-11',
+    category: 'definitions',
+    question: 'The optical center of a lens is:',
+    choices: ['The geometric center of the lens shape', 'The point through which light passes undeviated', 'The thickest point of the lens', 'The point where the lens contacts the frame'],
+    correctIndex: 1,
+    explanation: 'The optical center is the point on a lens through which light passes without being deviated (bent).',
+  },
+  {
+    id: 'def-12',
+    category: 'definitions',
+    question: 'Vertex distance is:',
+    choices: ['The distance between the two lenses', 'The distance from the back surface of the lens to the front of the cornea', 'The thickness of the lens at its center', 'The distance from the lens to the retina'],
+    correctIndex: 1,
+    explanation: 'Vertex distance is the distance from the back (ocular) surface of the spectacle lens to the front of the cornea, typically about 12-14mm.',
+  },
+  {
+    id: 'def-13',
+    category: 'definitions',
+    question: 'Pantoscopic tilt is:',
+    choices: ['The tilt of the lens toward the cheek at the bottom', 'The tilt of the lens away from the face', 'The horizontal angle of the frame', 'The wrap angle of the frame around the face'],
+    correctIndex: 0,
+    explanation: 'Pantoscopic tilt is the inward tilt of the bottom of the frame/lens toward the cheeks, typically 8-12 degrees.',
+  },
+  {
+    id: 'def-14',
+    category: 'definitions',
+    question: 'Retinoscopy is:',
+    choices: ['An imaging test of the retina', 'An objective method to determine refractive error by observing the reflex from the retina', 'A subjective refraction technique', 'A test for color vision deficiency'],
+    correctIndex: 1,
+    explanation: 'Retinoscopy is an objective technique where the examiner observes the retinal reflex to determine the refractive error.',
+  },
+  {
+    id: 'def-15',
+    category: 'definitions',
+    question: 'Anisometropia is:',
+    choices: ['Equal refractive error in both eyes', 'A significant difference in refractive error between the two eyes', 'An irregular pupil shape', 'Unequal pupil sizes'],
+    correctIndex: 1,
+    explanation: 'Anisometropia is a condition where the two eyes have significantly different refractive errors.',
+  },
+  {
+    id: 'def-16',
+    category: 'definitions',
+    question: 'Chromatic aberration is:',
+    choices: ['A lens defect causing color fringing because different wavelengths focus at different points', 'A coating defect on the lens', 'Distortion caused by lens thickness', 'The color tint applied to a lens'],
+    correctIndex: 0,
+    explanation: 'Chromatic aberration occurs because a lens refracts different wavelengths (colors) of light by different amounts, causing color fringing.',
+  },
+  {
+    id: 'def-17',
+    category: 'definitions',
+    question: 'The Abbe value (V-number) of a lens material measures:',
+    choices: ['Impact resistance', 'UV protection level', 'Dispersion (chromatic aberration)', 'Scratch resistance'],
+    correctIndex: 2,
+    explanation: 'The Abbe value quantifies a material\'s dispersion. Higher Abbe values mean less chromatic aberration. Crown glass has ~59, polycarbonate ~30.',
+  },
+  {
+    id: 'def-18',
+    category: 'definitions',
+    question: 'Emmetropia is:',
+    choices: ['Nearsightedness', 'Farsightedness', 'The condition where the eye has no refractive error', 'Unequal vision between the two eyes'],
+    correctIndex: 2,
+    explanation: 'Emmetropia is the ideal refractive state where parallel light focuses directly on the retina without correction.',
+  },
+  {
+    id: 'def-19',
+    category: 'definitions',
+    question: 'Phoria refers to:',
+    choices: ['A constant eye turn visible at all times', 'A latent tendency for the eyes to deviate, kept in check by fusion', 'An involuntary rhythmic eye movement', 'A drooping eyelid'],
+    correctIndex: 1,
+    explanation: 'A phoria is a latent deviation of the eyes that is controlled by fusion. It is only revealed when binocular vision is disrupted (e.g., cover test).',
+  },
+  {
+    id: 'def-20',
+    category: 'definitions',
+    question: 'Tropia (strabismus) is:',
+    choices: ['A latent eye deviation', 'A manifest (constant) eye turn visible without dissociation', 'Normal binocular alignment', 'An involuntary eye movement'],
+    correctIndex: 1,
+    explanation: 'A tropia (strabismus) is a manifest, constant misalignment of the eyes that is present even with both eyes open.',
+  },
+  {
+    id: 'def-21',
+    category: 'definitions',
+    question: 'The pupillary distance (PD) is:',
+    choices: ['The distance from the pupil to the retina', 'The distance between the centers of the pupils of the two eyes', 'The diameter of the pupil', 'The distance from the cornea to the lens'],
+    correctIndex: 1,
+    explanation: 'PD is the distance (in mm) between the centers of the two pupils, used to align the optical centers of lenses.',
+  },
+  {
+    id: 'def-22',
+    category: 'definitions',
+    question: 'An anti-reflective (AR) coating works by:',
+    choices: ['Absorbing all reflected light', 'Using destructive interference to cancel reflected light waves', 'Adding a dark tint to the lens', 'Increasing the index of refraction'],
+    correctIndex: 1,
+    explanation: 'AR coatings use thin layers that create destructive interference, canceling reflected light waves and allowing more light to pass through.',
+  },
+  {
+    id: 'def-23',
+    category: 'definitions',
+    question: 'The datum line (center line) of a frame is:',
+    choices: ['The line along the top of the frame', 'The horizontal line bisecting the lens opening', 'The bridge of the frame', 'The line connecting the temples'],
+    correctIndex: 1,
+    explanation: 'The datum line is a horizontal line that bisects the lens opening into equal upper and lower halves, used as a reference for measurements.',
+  },
+  {
+    id: 'def-24',
+    category: 'definitions',
+    question: 'Convergence is:',
+    choices: ['The eyes turning outward', 'The simultaneous inward turning of both eyes to focus on a near object', 'The dilation of the pupils', 'The flattening of the cornea'],
+    correctIndex: 1,
+    explanation: 'Convergence is the simultaneous inward rotation of both eyes to maintain single binocular vision when viewing a near object.',
+  },
+  {
+    id: 'def-25',
+    category: 'definitions',
+    question: 'Accommodation is:',
+    choices: ['The adjustment of pupil size', 'The change in shape of the crystalline lens to focus at different distances', 'The movement of the eye muscles', 'The adaptation to dark conditions'],
+    correctIndex: 1,
+    explanation: 'Accommodation is the process by which the crystalline lens changes shape (becomes more convex) to increase its power for near focus.',
+  },
+  {
+    id: 'def-26',
+    category: 'definitions',
+    question: 'Index of refraction is:',
+    choices: ['The weight of a lens material', 'The ratio of the speed of light in a vacuum to its speed in the material', 'The thickness of the lens', 'The color of the material'],
+    correctIndex: 1,
+    explanation: 'Index of refraction (n) = speed of light in vacuum / speed of light in the material. Higher index means thinner lenses for the same power.',
+  },
+  {
+    id: 'def-27',
+    category: 'definitions',
+    question: 'The segment height (seg height) is measured from:',
+    choices: ['The top of the lens to the seg line', 'The lowest point of the lens to the top of the segment', 'The optical center to the seg line', 'The pupil center to the frame top'],
+    correctIndex: 1,
+    explanation: 'Segment height is measured from the lowest point of the lens (in the frame) to the top of the multifocal segment.',
+  },
+  {
+    id: 'def-28',
+    category: 'definitions',
+    question: 'A plano lens has:',
+    choices: ['+1.00 D power', '-1.00 D power', 'Zero refractive power', 'Variable power'],
+    correctIndex: 2,
+    explanation: 'A plano lens has zero refractive power (0.00 D). It does not converge or diverge light.',
+  },
+  {
+    id: 'def-29',
+    category: 'definitions',
+    question: 'The effective diameter (ED) of a lens is:',
+    choices: ['The A measurement of the frame', 'Twice the longest radius from the geometric center to the edge of the lens', 'The diagonal measurement of the lens', 'The diameter of the optical zone'],
+    correctIndex: 1,
+    explanation: 'ED is twice the longest radius measured from the geometric center of the lens shape to any point on the edge.',
+  },
+  {
+    id: 'def-30',
+    category: 'definitions',
+    question: 'Total internal reflection occurs when:',
+    choices: ['Light hits a convex surface', 'Light passes from a denser to a less dense medium at an angle greater than the critical angle', 'Light is absorbed by the lens', 'Light passes through a prism'],
+    correctIndex: 1,
+    explanation: 'Total internal reflection occurs when light traveling in a denser medium hits the boundary at an angle exceeding the critical angle, reflecting all light back.',
   },
 ];
 
@@ -2120,6 +2440,191 @@ const mathQuestionGenerators = [
         choices: [`${finalSeg}mm`, `${wrong1}mm`, `${wrong2}mm`, `${wrong3}mm`],
         correctIndex: 0,
         explanation: `For every 2 degrees of tilt, add 1mm. ${tiltDeg}/2 = ${addMM}mm. Adjusted seg = ${measuredSeg} + ${addMM} = ${finalSeg}mm.`,
+      };
+    },
+  },
+  // Lens Thickness (plus lens: thicker at center)
+  {
+    id: 'math-thickness-1',
+    category: 'lenses',
+    generate() {
+      const power = randChoice([2.0, 3.0, 4.0, 5.0, 6.0]);
+      const diameter = randChoice([60, 65, 70]);
+      const index = randChoice([1.5, 1.6, 1.67]);
+      const radius = diameter / 2;
+      const sagMM = roundTo((power * (radius * radius)) / (2000 * (index - 1)), 2);
+      const edgeThick = 1.5;
+      const centerThick = roundTo(edgeThick + sagMM, 2);
+      const wrong1 = roundTo(centerThick + 1.5, 2);
+      const wrong2 = roundTo(sagMM, 2);
+      const wrong3 = roundTo(centerThick * 0.5, 2);
+      return {
+        question: `A +${power.toFixed(2)} D lens (n=${index}) with ${diameter}mm diameter and ${edgeThick}mm edge thickness has an approximate center thickness of:`,
+        choices: [`${centerThick}mm`, `${wrong1}mm`, `${wrong2}mm`, `${wrong3}mm`],
+        correctIndex: 0,
+        explanation: `Sag ≈ D × r² / (2000 × (n-1)) = ${power} × ${radius}² / (2000 × ${roundTo(index - 1, 2)}) = ${sagMM}mm. Center = edge + sag = ${edgeThick} + ${sagMM} = ${centerThick}mm.`,
+      };
+    },
+  },
+  // Surface Power (using lens maker's equation for single surface)
+  {
+    id: 'math-surfpower-1',
+    category: 'lenses',
+    generate() {
+      const index = randChoice([1.5, 1.53, 1.6, 1.67]);
+      const radiusCM = randChoice([10, 12.5, 15, 20, 25]);
+      const radiusM = radiusCM / 100;
+      const power = roundTo((index - 1) / radiusM, 2);
+      const wrong1 = roundTo(index / radiusM, 2);
+      const wrong2 = roundTo((index - 1) * radiusCM, 2);
+      const wrong3 = roundTo(power + 1.5, 2);
+      const fmtD = (v) => (v >= 0 ? '+' : '') + v.toFixed(2);
+      return {
+        question: `What is the surface power of a convex surface with radius ${radiusCM}cm and index ${index}?`,
+        choices: [fmtD(power), fmtD(wrong1), fmtD(wrong2), fmtD(wrong3)],
+        correctIndex: 0,
+        explanation: `Surface power = (n - 1) / r = (${index} - 1) / ${radiusM}m = ${fmtD(power)} D.`,
+      };
+    },
+  },
+  // Magnification (spectacle magnification approximation)
+  {
+    id: 'math-magnification-1',
+    category: 'lenses',
+    generate() {
+      const power = randChoice([4, 5, 6, 8, 10, 12]);
+      const sign = randChoice(['+', '-']);
+      const vertexMM = randChoice([12, 13, 14]);
+      const vertexM = vertexMM / 1000;
+      const signedPower = sign === '+' ? power : -power;
+      const mag = roundTo(1 / (1 - vertexM * signedPower), 4);
+      const magPercent = roundTo((mag - 1) * 100, 1);
+      const wrong1 = roundTo(magPercent + 3, 1);
+      const wrong2 = roundTo(Math.abs(magPercent * 0.5), 1);
+      const wrong3 = roundTo(magPercent + 7, 1);
+      const typeStr = magPercent > 0 ? 'magnification' : 'minification';
+      return {
+        question: `A ${sign}${power.toFixed(2)} D lens at ${vertexMM}mm vertex distance produces approximately what percent spectacle magnification?`,
+        choices: [`${Math.abs(magPercent)}% ${typeStr}`, `${Math.abs(wrong1)}% ${typeStr}`, `${Math.abs(wrong2)}% ${typeStr}`, `${Math.abs(wrong3)}% ${typeStr}`],
+        correctIndex: 0,
+        explanation: `SM = 1/(1 - d×D) = 1/(1 - ${vertexM}×${signedPower}) = ${mag}. Change = ${magPercent}% (${typeStr}).`,
+      };
+    },
+  },
+  // Prescribed Prism Split
+  {
+    id: 'math-prismsplit-1',
+    category: 'prism',
+    generate() {
+      const totalPrism = randChoice([2, 3, 4, 5, 6, 8]);
+      const base = randChoice(['Base Up', 'Base Down']);
+      const halfPrism = totalPrism / 2;
+      const oppositeBase = base === 'Base Up' ? 'Base Down' : 'Base Up';
+      const wrong1 = totalPrism;
+      const wrong2 = roundTo(halfPrism + 1, 1);
+      const wrong3 = roundTo(totalPrism / 3, 1);
+      return {
+        question: `A prescription calls for ${totalPrism}Δ ${base} OD. How should this be split between both eyes?`,
+        choices: [
+          `${halfPrism}Δ ${base} OD and ${halfPrism}Δ ${oppositeBase} OS`,
+          `${wrong1}Δ ${base} OD only`,
+          `${wrong2}Δ ${base} OD and ${wrong2}Δ ${oppositeBase} OS`,
+          `${wrong3}Δ ${base} each eye in same direction`,
+        ],
+        correctIndex: 0,
+        explanation: `Vertical prism is split equally: ${halfPrism}Δ each eye in opposite base directions (${base} OD / ${oppositeBase} OS).`,
+      };
+    },
+  },
+  // Image Jump
+  {
+    id: 'math-imagejump-1',
+    category: 'lenses',
+    generate() {
+      const addPower = randChoice([1.5, 2.0, 2.25, 2.5, 3.0]);
+      const segDrop = randChoice([3, 4, 5, 6]);
+      const segDropCM = segDrop / 10;
+      const jump = roundTo(segDropCM * addPower, 2);
+      const wrong1 = roundTo(segDrop * addPower, 2);
+      const wrong2 = roundTo(jump + 1.0, 2);
+      const wrong3 = roundTo(jump * 0.5, 2);
+      return {
+        question: `A flat-top bifocal with +${addPower.toFixed(2)} D add and seg OC ${segDrop}mm below the seg top produces how much image jump?`,
+        choices: [`${jump}Δ`, `${wrong1}Δ`, `${wrong2}Δ`, `${wrong3}Δ`],
+        correctIndex: 0,
+        explanation: `Image jump = c × D(add) = ${segDropCM}cm × ${addPower} = ${jump}Δ. The seg OC distance is converted to cm.`,
+      };
+    },
+  },
+  // Approximate Lens Power from Focal Length in cm
+  {
+    id: 'math-powerFromFocal-1',
+    category: 'lenses',
+    generate() {
+      const focalCM = randChoice([10, 20, 25, 33, 40, 50, 100]);
+      const power = roundTo(100 / focalCM, 2);
+      const wrong1 = roundTo(focalCM / 100, 2);
+      const wrong2 = roundTo(power + 2, 2);
+      const wrong3 = roundTo(1000 / focalCM, 2);
+      const fmtD = (v) => (v >= 0 ? '+' : '') + v.toFixed(2);
+      return {
+        question: `A lens has a focal length of ${focalCM}cm. What is its power in diopters?`,
+        choices: [fmtD(power), fmtD(wrong1), fmtD(wrong2), fmtD(wrong3)],
+        correctIndex: 0,
+        explanation: `Power = 100 / focal length in cm = 100 / ${focalCM} = ${fmtD(power)} D. (Equivalent to 1/f in meters.)`,
+      };
+    },
+  },
+  // Resultant Prism with Prentice (two meridians)
+  {
+    id: 'math-prentice-meridian-1',
+    category: 'prism',
+    generate() {
+      const sph = randChoice([-2.0, -3.0, -4.0, +2.0, +3.0, +4.0]);
+      const cyl = randChoice([-1.0, -1.5, -2.0]);
+      const decH = randChoice([3, 4, 5]);
+      const decV = randChoice([2, 3, 4]);
+      const powerH = sph;
+      const powerV = roundTo(sph + cyl, 2);
+      const prismH = roundTo(Math.abs(decH / 10 * powerH), 2);
+      const prismV = roundTo(Math.abs(decV / 10 * powerV), 2);
+      const wrong1 = roundTo(prismH + prismV, 2);
+      const wrong2 = roundTo(Math.abs(prismH - prismV), 2);
+      const wrong3 = roundTo(prismH * 2, 2);
+      return {
+        question: `An Rx of ${sph >= 0 ? '+' : ''}${sph.toFixed(2)} ${cyl >= 0 ? '+' : ''}${cyl.toFixed(2)} x180 is decentered ${decH}mm horizontally and ${decV}mm vertically. What are the horizontal and vertical prism amounts?`,
+        choices: [
+          `${prismH}Δ horizontal, ${prismV}Δ vertical`,
+          `${wrong1}Δ horizontal, ${wrong2}Δ vertical`,
+          `${wrong2}Δ horizontal, ${wrong1}Δ vertical`,
+          `${wrong3}Δ horizontal, ${wrong3}Δ vertical`,
+        ],
+        correctIndex: 0,
+        explanation: `Horizontal: sphere power ${sph >= 0 ? '+' : ''}${sph.toFixed(2)} × ${decH/10}cm = ${prismH}Δ. Vertical: (sph+cyl) = ${powerV >= 0 ? '+' : ''}${powerV.toFixed(2)} × ${decV/10}cm = ${prismV}Δ. At axis 180, horizontal uses sphere, vertical uses sphere+cyl.`,
+      };
+    },
+  },
+  // Compensated Power for frame tilt (Martin's formula of tilt)
+  {
+    id: 'math-tiltpower-1',
+    category: 'lenses',
+    generate() {
+      const power = randChoice([2.0, 3.0, 4.0, 5.0, 6.0]);
+      const sign = randChoice(['+', '-']);
+      const tiltDeg = randChoice([5, 8, 10, 12, 15]);
+      const tiltRad = tiltDeg * Math.PI / 180;
+      const signedPower = sign === '+' ? power : -power;
+      const newSph = roundTo(signedPower * (1 + (Math.sin(tiltRad) * Math.sin(tiltRad)) / 3), 2);
+      const cylInduced = roundTo(signedPower * (Math.sin(tiltRad) * Math.sin(tiltRad)) / 3, 2);
+      const fmtD = (v) => (v >= 0 ? '+' : '') + v.toFixed(2);
+      const wrong1 = fmtD(roundTo(signedPower * 1.1, 2));
+      const wrong2 = fmtD(roundTo(signedPower + 0.50, 2));
+      const wrong3 = fmtD(roundTo(signedPower, 2));
+      return {
+        question: `A ${sign}${power.toFixed(2)} D lens is tilted ${tiltDeg}° (pantoscopic). Using Martin's formula, the approximate new sphere power is:`,
+        choices: [fmtD(newSph), wrong1, wrong2, wrong3],
+        correctIndex: 0,
+        explanation: `Martin's tilt formula: new sphere ≈ D(1 + sin²θ/3) = ${fmtD(signedPower)}(1 + sin²${tiltDeg}°/3) = ${fmtD(newSph)}. Tilt also induces ~${fmtD(cylInduced)} D cylinder.`,
       };
     },
   },
