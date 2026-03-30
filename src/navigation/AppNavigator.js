@@ -65,11 +65,11 @@ export default function AppNavigator() {
         <Stack.Screen
           name="TestEngine"
           component={TestEngineScreen}
-          options={{
-            title: 'Test',
+          options={({ route }) => ({
+            title: route.params?.mode === 'review' ? 'Review' : 'Test',
             headerLeft: () => null,
             gestureEnabled: false,
-          }}
+          })}
         />
         <Stack.Screen
           name="TestResults"

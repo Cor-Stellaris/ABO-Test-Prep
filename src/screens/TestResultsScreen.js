@@ -116,6 +116,22 @@ export default function TestResultsScreen({ route, navigation }) {
 
       {/* Actions */}
       <View style={styles.actions}>
+        {result.questions && result.incorrect > 0 && (
+          <TouchableOpacity
+            style={styles.reviewButton}
+            onPress={() =>
+              navigation.navigate('TestEngine', {
+                mode: 'review',
+                questions: result.questions,
+                answers: result.answers,
+              })
+            }
+          >
+            <Text style={styles.reviewButtonText}>
+              Review Missed Questions ({result.incorrect})
+            </Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
           style={styles.primaryButton}
           onPress={() => navigation.navigate('Home')}
@@ -310,6 +326,17 @@ const styles = StyleSheet.create({
   secondaryButtonText: {
     ...FONTS.bold,
     color: COLORS.primary,
+    fontSize: 16,
+  },
+  reviewButton: {
+    backgroundColor: '#E67E22',
+    borderRadius: 12,
+    paddingVertical: 16,
+    alignItems: 'center',
+    ...SHADOWS.card,
+  },
+  reviewButtonText: {
+    ...FONTS.button,
     fontSize: 16,
   },
 });

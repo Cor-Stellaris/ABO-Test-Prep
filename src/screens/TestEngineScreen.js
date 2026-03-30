@@ -12,7 +12,16 @@ import { saveTestResult } from '../utils/storage';
 import { COLORS, FONTS, SHADOWS } from '../utils/theme';
 
 export default function TestEngineScreen({ route, navigation }) {
-  const { mode, numQuestions = 50, categoryId, categoryName, timeLimitMinutes } = route.params;
+  const {
+    mode,
+    numQuestions = 50,
+    categoryId,
+    categoryName,
+    timeLimitMinutes,
+    questions: reviewQuestions = null,
+    answers: reviewAnswers = null,
+  } = route.params;
+  const isReview = mode === 'review';
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -41,19 +50,39 @@ export default function TestEngineScreen({ route, navigation }) {
 
   useEffect(() => {
     let q;
-    if (mode === 'category') {
+    if (isReview && reviewQuestions) {
+      // Filter to only missed questions
+      const missed = reviewQuestions
+        .map((question, i) => ({ question, userAnswer: reviewAnswers[i] }))
+        .filter(({ question, userAnswer }) =>
+          userAnswer !== -1 && userAnswer !== null && userAnswer !== question.correctIndex
+        );
+      q = missed.map(({ question }) => question);
+      setAnswers(missed.map(({ userAnswer }) => userAnswer));
+      setShowExplanation(true);
+      setSelectedAnswer(missed.length > 0 ? missed[0].userAnswer : null);
+    } else if (mode === 'category') {
       q = generateCategoryTest(categoryId);
+      setAnswers(new Array(q.length).fill(null));
     } else {
       q = generateMockTest(numQuestions);
+      setAnswers(new Array(q.length).fill(null));
     }
     setQuestions(q);
-    setAnswers(new Array(q.length).fill(null));
 
-    // Initialize timer if timed test
-    if (timeLimitMinutes) {
+    // Initialize timer if timed test (not in review mode)
+    if (timeLimitMinutes && !isReview) {
       setTimeRemaining(timeLimitMinutes * 60);
     }
   }, []);
+
+  // Sync review mode state when navigating between questions
+  useEffect(() => {
+    if (isReview && answers.length > 0) {
+      setSelectedAnswer(answers[currentIndex]);
+      setShowExplanation(true);
+    }
+  }, [currentIndex, isReview]);
 
   // Countdown timer effect
   useEffect(() => {
@@ -186,6 +215,10 @@ export default function TestEngineScreen({ route, navigation }) {
       score: Math.round((correct / qs.length) * 100),
       categoryResults,
       answers: finalAnswers,
+      questions: qs.map((q) => ({
+        id: q.id, category: q.category, question: q.question,
+        choices: q.choices, correctIndex: q.correctIndex, explanation: q.explanation,
+      })),
       timeLimitMinutes: timeLimitMinutes || null,
       timeExpired: true,
     };
@@ -243,6 +276,10 @@ export default function TestEngineScreen({ route, navigation }) {
       score: Math.round((correct / questions.length) * 100),
       categoryResults,
       answers: finalAnswers,
+      questions: questions.map((q) => ({
+        id: q.id, category: q.category, question: q.question,
+        choices: q.choices, correctIndex: q.correctIndex, explanation: q.explanation,
+      })),
       timeLimitMinutes: timeLimitMinutes || null,
       timeUsedSeconds: timeUsed,
       timeExpired: false,
@@ -399,7 +436,37 @@ export default function TestEngineScreen({ route, navigation }) {
 
       {/* Bottom Actions */}
       <View style={styles.bottomBar}>
-        {!showExplanation ? (
+        {isReview ? (
+          <View style={styles.bottomRow}>
+            <TouchableOpacity
+              style={[styles.skipButton, currentIndex === 0 && { opacity: 0.4 }]}
+              onPress={() => {
+                if (currentIndex > 0) {
+                  setCurrentIndex(currentIndex - 1);
+                  scrollRef.current?.scrollTo({ y: 0, animated: true });
+                }
+              }}
+              disabled={currentIndex === 0}
+            >
+              <Text style={styles.skipButtonText}>Previous</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.nextButton}
+              onPress={() => {
+                if (currentIndex < questions.length - 1) {
+                  setCurrentIndex(currentIndex + 1);
+                  scrollRef.current?.scrollTo({ y: 0, animated: true });
+                } else {
+                  navigation.goBack();
+                }
+              }}
+            >
+              <Text style={styles.nextButtonText}>
+                {currentIndex < questions.length - 1 ? 'Next' : 'Done'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : !showExplanation ? (
           <View style={styles.bottomRow}>
             <TouchableOpacity
               style={styles.skipButton}
