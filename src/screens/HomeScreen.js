@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,8 +8,18 @@ import {
   StatusBar,
 } from 'react-native';
 import { COLORS, FONTS, SHADOWS } from '../utils/theme';
+import { isPremium } from '../utils/premium';
 
 export default function HomeScreen({ navigation }) {
+  const [premium, setPremium] = useState(false);
+
+  useEffect(() => {
+    const checkPremium = () => isPremium().then(setPremium);
+    checkPremium();
+    const unsubscribe = navigation.addListener('focus', checkPremium);
+    return unsubscribe;
+  }, [navigation]);
+
   const menuItems = [
     {
       title: 'Study Material',
@@ -34,9 +44,11 @@ export default function HomeScreen({ navigation }) {
     },
     {
       title: 'Exam Simulation',
-      subtitle: '125 questions, 2-hour timer — real exam format',
-      icon: '🏆',
-      screen: 'ExamSim',
+      subtitle: premium
+        ? '125 questions, 2-hour timer — real exam format'
+        : 'Premium feature — unlock full exam simulation',
+      icon: premium ? '🏆' : '🔒',
+      screen: premium ? 'ExamSim' : 'Premium',
       color: COLORS.accent,
     },
     {
@@ -45,6 +57,15 @@ export default function HomeScreen({ navigation }) {
       icon: '📊',
       screen: 'TestHistory',
       color: '#8E44AD',
+    },
+    {
+      title: premium ? 'Premium Active' : 'Go Premium',
+      subtitle: premium
+        ? 'You have full access to all features'
+        : 'Unlock all features & exam simulation',
+      icon: premium ? '✓' : '⭐',
+      screen: 'Premium',
+      color: '#F39C12',
     },
   ];
 

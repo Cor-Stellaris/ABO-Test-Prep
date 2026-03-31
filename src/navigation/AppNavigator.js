@@ -9,6 +9,7 @@ import StudyMaterialScreen from '../screens/StudyMaterialScreen';
 import TestSetupScreen from '../screens/TestSetupScreen';
 import CategoryTestScreen from '../screens/CategoryTestScreen';
 import ExamSimSetupScreen from '../screens/ExamSimSetupScreen';
+import PremiumScreen from '../screens/PremiumScreen';
 import TestEngineScreen from '../screens/TestEngineScreen';
 import TestResultsScreen from '../screens/TestResultsScreen';
 import TestHistoryScreen from '../screens/TestHistoryScreen';
@@ -90,6 +91,11 @@ export default function AppNavigator() {
           name="TestHistory"
           component={TestHistoryScreen}
           options={{ title: 'Test History' }}
+        />
+        <Stack.Screen
+          name="Premium"
+          component={PremiumScreen}
+          options={{ title: 'Premium' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

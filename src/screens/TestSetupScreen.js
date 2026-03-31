@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
   ScrollView,
   Switch,
+  Alert,
 } from 'react-native';
 import { COLORS, FONTS, SHADOWS } from '../utils/theme';
+import { isPremium } from '../utils/premium';
 
 const QUESTION_COUNTS = [20, 30, 50, 75];
 const TIME_LIMITS = [
@@ -19,9 +21,14 @@ const TIME_LIMITS = [
 ];
 
 export default function TestSetupScreen({ navigation }) {
-  const [selectedCount, setSelectedCount] = useState(50);
+  const [selectedCount, setSelectedCount] = useState(20);
   const [timedEnabled, setTimedEnabled] = useState(false);
   const [selectedMinutes, setSelectedMinutes] = useState(60);
+  const [premium, setPremium] = useState(false);
+
+  useEffect(() => {
+    isPremium().then(setPremium);
+  }, []);
 
   return (
     <ScrollView
@@ -38,25 +45,43 @@ export default function TestSetupScreen({ navigation }) {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Number of Questions</Text>
         <View style={styles.optionRow}>
-          {QUESTION_COUNTS.map((count) => (
-            <TouchableOpacity
-              key={count}
-              style={[
-                styles.optionButton,
-                selectedCount === count && styles.optionButtonActive,
-              ]}
-              onPress={() => setSelectedCount(count)}
-            >
-              <Text
+          {QUESTION_COUNTS.map((count) => {
+            const locked = !premium && count > 30;
+            return (
+              <TouchableOpacity
+                key={count}
                 style={[
-                  styles.optionText,
-                  selectedCount === count && styles.optionTextActive,
+                  styles.optionButton,
+                  selectedCount === count && styles.optionButtonActive,
+                  locked && styles.optionButtonLocked,
                 ]}
+                onPress={() => {
+                  if (locked) {
+                    Alert.alert(
+                      'Premium Feature',
+                      `${count}-question tests require Premium. Upgrade to unlock!`,
+                      [
+                        { text: 'Not Now', style: 'cancel' },
+                        { text: 'Go Premium', onPress: () => navigation.navigate('Premium') },
+                      ]
+                    );
+                  } else {
+                    setSelectedCount(count);
+                  }
+                }}
               >
-                {count}
-              </Text>
-            </TouchableOpacity>
-          ))}
+                <Text
+                  style={[
+                    styles.optionText,
+                    selectedCount === count && styles.optionTextActive,
+                    locked && styles.optionTextLocked,
+                  ]}
+                >
+                  {count}{locked ? ' 🔒' : ''}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
         </View>
       </View>
 
@@ -265,5 +290,13 @@ const styles = StyleSheet.create({
   startButtonText: {
     ...FONTS.button,
     fontSize: 18,
+  },
+  optionButtonLocked: {
+    borderColor: COLORS.border,
+    backgroundColor: '#F8F9FA',
+    opacity: 0.7,
+  },
+  optionTextLocked: {
+    color: COLORS.textLight,
   },
 });
