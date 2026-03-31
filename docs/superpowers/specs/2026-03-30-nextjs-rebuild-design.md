@@ -131,14 +131,15 @@ Stripe subscription tracking.
 
 ## Premium Tiers
 
-| Feature | Free | Premium ($29.99/yr) |
+| Feature | Free | Premium ($9.99/mo) |
 |---------|------|---------------------|
 | Study material | All categories | All categories |
 | Practice by category | All categories | All categories |
 | Mock tests | 20 questions max | 20, 30, 50, 75 questions |
 | Exam simulation (125Q/2hr) | Locked | Unlocked |
-| Test history | Yes | Yes |
+| Test history & tracking | Locked | Unlocked |
 | Missed question review | Locked | Unlocked |
+| Timed test mode | Locked | Unlocked |
 
 Premium is determined by: `user.premium_until > now()` OR `subscription.status === 'active'`.
 
@@ -153,7 +154,7 @@ Premium is determined by: `user.premium_until > now()` OR `subscription.status =
 ## Payment Flow
 
 1. User visits `/premium` → sees pricing and features
-2. Clicks "Subscribe" → API route `/api/checkout` creates Stripe Checkout Session
+2. Clicks "Subscribe — $9.99/mo" → API route `/api/checkout` creates Stripe Checkout Session (monthly recurring)
 3. User redirected to Stripe's hosted checkout page
 4. After payment, Stripe webhook fires → updates `subscriptions` table + sets `users.premium_until`
 5. User redirected back to `/premium?success=true` → sees "Premium Active"
