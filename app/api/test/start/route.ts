@@ -1,6 +1,7 @@
 import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase/admin';
+import { getOrCreateUser } from '@/lib/get-user';
 
 export async function POST(request: Request) {
   const { userId } = await auth();
@@ -9,16 +10,8 @@ export async function POST(request: Request) {
   const body = await request.json();
   const { mode, categoryId, questionCount, timed } = body;
 
-  // Get user from Supabase
-  const { data: user } = await supabaseAdmin
-    .from('users')
-    .select('id')
-    .eq('clerk_id', userId)
-    .single();
-
-  if (!user) {
-    return NextResponse.json({ error: 'User not found' }, { status: 404 });
-  }
+  const user = await getOrCreateUser(userId);
+  if (!user) return NextResponse.json({ error: 'Failed to get user' }, { status: 500 });
 
   // Fetch questions based on mode
   let query = supabaseAdmin

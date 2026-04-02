@@ -2,6 +2,7 @@ import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { supabaseAdmin } from '@/lib/supabase/admin';
+import { getOrCreateUser } from '@/lib/get-user';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -9,14 +10,8 @@ export async function POST() {
   const { userId } = await auth();
   if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  // Get user from Supabase
-  const { data: user } = await supabaseAdmin
-    .from('users')
-    .select('id, email')
-    .eq('clerk_id', userId)
-    .single();
-
-  if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 });
+  const user = await getOrCreateUser(userId);
+  if (!user) return NextResponse.json({ error: 'Failed to get user' }, { status: 500 });
 
   // Check for existing Stripe customer
   const { data: existingSub } = await supabaseAdmin

@@ -3,6 +3,7 @@ import { auth } from '@clerk/nextjs/server';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { supabaseAdmin } from '@/lib/supabase/admin';
+import { getOrCreateUser } from '@/lib/get-user';
 import TestEngine from '@/components/TestEngine';
 
 export default async function TestPage({
@@ -14,12 +15,7 @@ export default async function TestPage({
   const { userId } = await auth();
   if (!userId) redirect('/sign-in');
 
-  const { data: user } = await supabaseAdmin
-    .from('users')
-    .select('id')
-    .eq('clerk_id', userId)
-    .single();
-
+  const user = await getOrCreateUser(userId);
   if (!user) redirect('/sign-in');
 
   const { data: testResult } = await supabaseAdmin
