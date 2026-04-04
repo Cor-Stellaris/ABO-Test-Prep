@@ -17,6 +17,9 @@ export default async function StudyPage() {
       </header>
 
       <main className="max-w-4xl mx-auto px-6 py-8">
+        <Link href="/dashboard" className="text-sm text-[var(--color-primary)] hover:underline mb-4 inline-block">
+          ← Back to dashboard
+        </Link>
         <h2 className="text-2xl font-bold mb-6">Study Material</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {(categories as Category[] | null)?.map((cat) => (

@@ -38,6 +38,11 @@ export default async function TestPage({
         <Link href="/dashboard" className="text-xl font-bold hover:opacity-90">ABO Prep</Link>
         <UserButton />
       </header>
+      <main className="max-w-4xl mx-auto px-6 py-8">
+        <Link href="/dashboard" className="text-sm text-[var(--color-primary)] hover:underline mb-4 inline-block">
+          ← Back to dashboard
+        </Link>
+      </main>
       <TestEngine
         testId={testId}
         questions={testResult.questions as Array<{
